@@ -1,0 +1,288 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #fff;
+  color: #333333;
+}
+
+.booking-container {
+  padding: 30px 40px;
+  background: white;
+  max-width: 700px;
+  margin: 30px auto;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.booking-container h2 {
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #333333;
+  text-align: center;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #333;
+  font-size: 16px;
+}
+
+input,
+select,
+textarea {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1em;
+  color: #555;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #FF204E;
+  box-shadow: 0 0 0 3px rgba(255, 32, 78, 0.1);
+  outline: none;
+}
+
+textarea {
+  resize: none;
+  min-height: 80px;
+}
+
+/* Nút submit */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #00224D;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #001731;
+}
+
+.booking-form .back {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+  color: #FF204E;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+/* Thông báo thành công */
+.success-message {
+  background-color: #e6ffe6;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  color: #006600;
+  font-size: 16px;
+}
+
+/* Hiển thị dòng báo lỗi màu đỏ */
+.error-text {
+  color: red;
+  font-size: 13px;
+  margin-top: 4px;
+  margin-left: 4px;
+}
+
+.week-row {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 18px;
+  max-width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 12px;
+}
+.day-btn {
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  min-width: 70px;
+  min-height: 62px;
+  padding: 6px 0 2px 0;
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.18s, border 0.18s, color 0.18s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: none;
+}
+.day-btn.selected {
+  background: #ede9fe;
+  border: 2px solid #7c3aed;
+  color: #7c3aed;
+  font-weight: 700;
+}
+.day-btn:disabled {
+  background: #f3f4f6;
+  color: #bbb;
+  border: 1.5px solid #e5e7eb;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.slot-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-top: 8px;
+}
+.slot-btn {
+  background: #fff;
+  border: 2px solid #6ee7b7;
+  border-radius: 10px;
+  padding: 10px 22px;
+  font-size: 1rem;
+  color: #059669;
+  cursor: pointer;
+  transition: background 0.18s, border 0.18s, color 0.18s;
+  font-weight: 700;
+  min-width: 110px;
+  text-align: center;
+  box-sizing: border-box;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-width: 2px;
+}
+.slot-btn.open {
+  border: 1.5px solid #6ee7b7;
+  background: #fff;
+  color: #059669;
+}
+.slot-btn.open:hover {
+  background: #e0fdf4;
+  color: #047857;
+  border: 1.5px solid #059669;
+}
+.slot-btn.selected {
+  background: #0ea5e9 !important;
+  border: 2px solid #0ea5e9 !important;
+  color: #fff !important;
+  border-width: 2px;
+}
+.slot-btn.closed {
+  background: #fffbe6;
+  color: #b45309;
+  border: 2px solid #fde68a;
+  cursor: not-allowed;
+  opacity: 0.95;
+}
+.slot-btn.past {
+  background: #f3f4f6;
+  color: #bbb;
+  border: 1.5px solid #e5e7eb;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.slot-btn:disabled {
+  background: #f3f4f6;
+  color: #bbb;
+  border: 1.5px solid #e5e7eb;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.week-arrow {
+  background: none;
+  border: none;
+  font-size: 1.7rem;
+  color: #d90429;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0 10px;
+  transition: color 0.18s;
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+.week-arrow:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+.day-btn.past {
+  background: #f3f4f6;
+  color: #bbb;
+  border: 1.5px solid #e5e7eb;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.day-btn.closed {
+  background: #fffbe6;
+  color: #b45309;
+  border: 2px solid #fde68a;
+  cursor: not-allowed;
+  opacity: 0.95;
+}
+.day-btn.open {
+  background: #fff;
+  color: #d90429;
+  border: 1.5px solid #fca5a5;
+}
+.day-btn.selected {
+  background: #d90429;
+  border: 2px solid #b3001f;
+  color: #fff;
+  font-weight: 700;
+}
+@media (max-width: 900px) {
+  .slot-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .week-row {
+    gap: 10px;
+    max-width: 100vw;
+    padding: 0 4px;
+  }
+  .day-btn {
+    min-width: 48px;
+  }
+}
+@media (max-width: 600px) {
+  .slot-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 7px;
+  }
+  .slot-btn {
+    padding: 7px 10px;
+    font-size: 0.97rem;
+    min-width: 80px;
+  }
+}

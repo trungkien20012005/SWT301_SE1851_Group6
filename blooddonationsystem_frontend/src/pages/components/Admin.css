@@ -1,0 +1,359 @@
+
+/* RESET & FONT */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ===== ADMIN HEADER ===== */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10%;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+/* Logo */
+.admin-logo {
+  display: flex;
+  align-items: center;
+}
+
+.admin-logo .logo-img {
+  height: 70px;
+}
+
+/* Greeting */
+.admin-greeting {
+  font-size: 26px;
+  font-weight: 600;
+  color: #333333;
+  white-space: nowrap;
+}
+
+.admin-name {
+  color: #FF204E;
+  font-weight: normal;
+  text-shadow: 2px 2px 6px rgba(255, 32, 78, 0.4);
+}
+
+/* Logout button */
+.admin-logout-btn {
+  background-color: #FF204E;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.admin-logout-btn:hover {
+  background-color: #d91b41;
+}
+
+
+
+.admin-container {
+  padding: 70px 0;
+  max-width: 1000px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 70px;
+}
+
+.role-summary {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 40px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.summary-box {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.summary-icon {
+  font-size: 50px;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.summary-role {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.summary-count {
+  font-size: 24px;
+  color: #FF204E;
+  font-weight: bold;
+}
+
+
+.admin-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  gap: 40px;
+}
+
+.admin-controls input,
+.admin-controls select {
+  padding: 10px;
+  font-size: 16px !important;
+  width: 48%;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.03);
+}
+
+.admin-table th,
+.admin-table td {
+  border: 1px solid #ccc;
+  padding: 15px;
+  text-align: center;
+  font-size: 15px;
+  color: #000; /* toàn bộ chữ màu đen */
+}
+
+.admin-table th {
+  background-color: #FF204E;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.admin-table td {
+  background-color: #fff;
+}
+
+/* ===== BUTTONS IN TABLE ===== */
+.table-action-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.table-action-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.action-button-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.action-button-icon img {
+  width: 40px;
+}
+
+.status-btn {
+  background-color: #0099ff;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  margin-left: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.status-btn:hover {
+  background-color: #007acc;
+}
+
+.edit-btn {
+  background-color: #28a745; 
+}
+
+.delete-btn {
+  background-color: #dc3545;
+}
+
+/* ===== MODAL EDIT ROLE ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal-content h3 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.modal-content select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin: 15px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.save-button,
+.cancel-button {
+  flex: 1;
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.save-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.save-button:hover {
+  background-color: #218838;
+}
+
+.cancel-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.cancel-button:hover {
+  background-color: #c82333;
+}
+
+/* ===== MODAL DELETE CONFIRMATION ===== */
+.modal-content p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.modal-content strong {
+  color: #FF204E;
+  font-weight: 600;
+}
+
+/* Đảm bảo các nút Xóa / Hủy thống nhất kiểu */
+.save-button-2,
+.cancel-button-2 {
+  flex: 1;
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.modal-buttons .save-button-2 {
+  background-color: #dc3545;
+  color: white;
+}
+
+.modal-buttons .save-button-2:hover {
+  background-color: #c82333;
+}
+
+.modal-buttons .cancel-button-2 {
+  background-color: #6c757d;
+  color: white;
+}
+
+.modal-buttons .cancel-button-2:hover {
+  background-color: #5a6268;
+}
+
+.admin-message-success {
+  background: #d4edda;
+  color: #155724;
+  padding: 12px 20px;
+  border-radius: 6px;
+  margin: 16px 0;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid #c3e6cb;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  z-index: 100;
+}
+
+.admin-toast-success {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  background: #28a745;
+  color: #fff;
+  padding: 16px 32px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  z-index: 9999;
+  animation: fadeInOut 2.5s;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-20px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
