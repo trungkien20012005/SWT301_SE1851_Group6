@@ -1,0 +1,77 @@
+.team-wrapper {
+    background: linear-gradient(to right, #f8fbff, #eef4f9);
+    padding: 40px 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    color: #2c3e50;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    margin: 40px auto;
+    max-width: 1200px;
+    padding-bottom: 0;
+}
+
+.team-heading {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1a1a1a;
+}
+
+.team-title {
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 60px;
+    margin-bottom: 20px;
+    color: #1a1a1a;
+}
+
+.team-subtitle {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+/* Grid chứa các ảnh và mô tả */
+.team-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-top: 30px;
+}
+
+/* Card chứa ảnh và caption */
+.team-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 340px; /* tăng từ 300px */
+    min-height: 340px; /* tăng từ 300px */
+    text-align: center;
+}
+
+/* Hình ảnh đều nhau */
+.team-grid-image {
+    width: 100%;
+    height: 220px; /* tăng từ 170px */
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.team-grid-image:hover {
+    transform: scale(1.05);
+}
+
+.team-caption {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+}

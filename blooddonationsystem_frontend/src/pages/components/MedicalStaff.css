@@ -1,0 +1,437 @@
+/* -----------------------------------------
+  1. ROOT VARIABLES & BASE STYLES
+------------------------------------------ */
+:root {
+  --primary: #0a2540;
+  --secondary: #f43f5e;
+  --bg: #f8fafd;
+  --text: #1e293b;
+  --card-bg: #ffffff;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --radius: 16px;
+}
+
+body {
+  background: var(--bg);
+  font-family: "Poppins", sans-serif;
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* -----------------------------------------
+  2. MAIN LAYOUT STRUCTURE
+------------------------------------------ */
+.medical-app {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+/* -----------------------------------------
+  3. SIDEBAR (LEFT)
+------------------------------------------ */
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  background: #ffffff;
+  padding: 20px 0;
+  border-radius: 0 12px 12px 0;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu li {
+  padding: 18px 30px;
+  font-weight: 600;
+  background-color: #ffffff;
+  transition: background 0.2s ease;
+}
+
+.sidebar-menu li:hover {
+  background: #f5f5f5;
+}
+
+.sidebar-menu li.active {
+  background: var(--secondary);
+}
+
+.sidebar-menu li.active .menu-item {
+  color: #ffffff;
+}
+
+.menu-item {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* -----------------------------------------
+  4. MAIN CONTENT AREA (RIGHT)
+------------------------------------------ */
+.main-content {
+  padding: 40px;
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--bg);
+  box-sizing: border-box;
+
+  /* Loại bỏ margin-left */
+  margin-left: 0;
+}
+
+/* -----------------------------------------
+  5. STAFF DASHBOARD CONTAINER
+------------------------------------------ */
+.staff-dashboard {
+  max-width: 1200px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 0 20px;
+}
+
+/* -----------------------------------------
+  5.1 STAFF PROFILE CARD
+------------------------------------------ */
+.staff-profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--card-bg);
+  padding: 30px 40px;
+  border-radius: 20px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  flex-wrap: wrap;
+}
+
+.staff-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e2e8f0;
+  margin-right: 24px;
+}
+
+.profile-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.name-role {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.name-role h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0;
+}
+
+.role-tag {
+  background-color: var(--secondary);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.staff-profile p {
+  margin: 4px 0;
+  font-size: 15px;
+  color: #475569;
+}
+
+.edit-button {
+  background: var(--primary);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.edit-button:hover {
+  background: #163e65;
+}
+
+/* -----------------------------------------
+  5.2 DASHBOARD CONTENT GRID (2 columns)
+------------------------------------------ */
+.staff-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 50px;
+}
+
+/* -----------------------------------------
+  5.3 APPOINTMENT LIST
+------------------------------------------ */
+.appointment-list {
+  background: white;
+  padding: 28px !important;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.appointment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.appointment-header h3 {
+  font-size: 20px;
+  color: var(--primary);
+  font-weight: 600;
+  margin: 0;
+  padding-right: 190px;
+}
+
+.appointment-header input[type="date"] {
+  font-size: 1rem;
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #f9f9f9;
+  color: #333;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background: #f1f5f9;
+  padding: 14px 20px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  font-size: 16px;
+  color: #1f2937;
+}
+
+/* -----------------------------------------
+  5.4 TODAY CALENDAR (RIGHT COLUMN)
+------------------------------------------ */
+.calendar {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  border: none;
+}
+
+.calendar h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+/* -----------------------------------------
+  6. STATUS BUTTONS (SUCCESS, PENDING)
+------------------------------------------ */
+.status-button {
+  background-image:none;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.status-done {
+  background-color: #22c55e;
+  color: white;
+}
+
+.status-pending {
+  background-color: #facc15;
+  color: #1e293b;
+}
+
+
+/* -----------------------------------------
+  7. DATEPICKER
+------------------------------------------ */
+.custom-datepicker {
+  font-family: 'Poppins', sans-serif;
+  border: none;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-right: 30px;
+}
+
+.react-datepicker__header {
+  background-color: #ED232B;
+  color: white;
+  border: none;
+  padding-top: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+  font-weight: 500;
+  color: white;
+}
+
+.react-datepicker__day {
+  color: #333;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 2px 0;
+  margin: 2px;
+  transition: all 0.2s ease-in-out;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #ED232B !important;
+  color: white !important;
+}
+
+.react-datepicker__day--today {
+  font-weight: bold;
+  color: #ED232B;
+  border-bottom: 2px solid #ED232B;
+}
+
+.react-datepicker__triangle {
+  display: none;
+}
+
+.react-datepicker__month-dropdown,
+.react-datepicker__year-dropdown {
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.react-datepicker__navigation {
+  top: 16px;
+}
+
+.react-datepicker__today-button {
+  background: none;
+  border: none;
+  color: #ED232B;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.react-datepicker__current-month {
+  font-size: 28px !important;
+  color: #333333 !important;
+  font-weight: bold !important;
+  text-align: center;
+}
+
+
+/* Lịch sử lấy máu - nâng cấp UI */
+.collect-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+/* Hiệu ứng động cho card lịch sử lấy máu */
+.collect-history-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(237,35,43,0.08);
+  padding: 22px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: box-shadow 0.25s, transform 0.18s, border-color 0.18s;
+  border-left: 6px solid #ED232B;
+  opacity: 0;
+  transform: translateY(24px) scale(0.98);
+  animation: fadeInCard 0.5s ease forwards;
+}
+.collect-history-card:hover {
+  box-shadow: 0 8px 32px rgba(237,35,43,0.18);
+  transform: scale(1.025) translateY(-2px);
+  border-left: 6px solid #d81b3a;
+}
+
+@keyframes fadeInCard {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.collect-history-title {
+  color: #ED232B;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+}
+
+.collect-history-label {
+  font-weight: 600;
+  color: #333;
+  min-width: 120px;
+  display: inline-block;
+}
+.collect-history-value {
+  color: #222;
+  font-size: 1.08rem;
+}
+
+@media (max-width: 700px) {
+  .collect-history-card {
+    padding: 14px 8px;
+  }
+  .collect-history-title {
+    font-size: 1.3rem;
+  }
+}
+
+
+
