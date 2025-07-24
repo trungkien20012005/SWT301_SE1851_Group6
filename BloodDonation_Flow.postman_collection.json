@@ -1,0 +1,386 @@
+{
+  "info": {
+    "_postman_id": "bdfb1e7e-1234-4cde-8a1a-collection-blood-donation",
+    "name": "Blood Donation System Flow",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Login Customer",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "{{base_url}}/api/auth/login", "host": [ "{{base_url}}" ], "path": [ "api", "auth", "login" ] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"customer@example.com\",\n  \"password\": \"customer_password\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+              "var json = pm.response.json();",
+              "pm.test(\"Token exists\", function () { pm.expect(json.token).to.be.a(\"string\").and.not.empty; });",
+              "pm.collectionVariables.set(\"customer_token\", json.token);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Login Medical Staff",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "{{base_url}}/api/auth/login", "host": [ "{{base_url}}" ], "path": [ "api", "auth", "login" ] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"medical@example.com\",\n  \"password\": \"medical_password\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+              "var json = pm.response.json();",
+              "pm.test(\"Token exists\", function () { pm.expect(json.token).to.be.a(\"string\").and.not.empty; });",
+              "pm.collectionVariables.set(\"medical_token\", json.token);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Login Manager",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "{{base_url}}/api/auth/login", "host": [ "{{base_url}}" ], "path": [ "api", "auth", "login" ] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"manager@example.com\",\n  \"password\": \"manager_password\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+              "var json = pm.response.json();",
+              "pm.test(\"Token exists\", function () { pm.expect(json.token).to.be.a(\"string\").and.not.empty; });",
+              "pm.collectionVariables.set(\"manager_token\", json.token);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customer Register Blood Donation",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{customer_token}}" }
+        ],
+        "url": { "raw": "{{base_url}}/api/registers/donationRegister", "host": [ "{{base_url}}" ], "path": [ "api", "registers", "donationRegister" ] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"date\": \"2024-06-10\",\n  \"slotId\": 1,\n  \"note\": \"Đăng ký hiến máu\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+              "var json = pm.response.json();",
+              "pm.test(\"Có id trả về\", function () { pm.expect(json.id).to.exist; });",
+              "pm.collectionVariables.set(\"register_id\", json.id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Medical Staff Approve Blood Donation Register",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{medical_token}}" }
+        ],
+        "url": { "raw": "{{base_url}}/api/registers/{{register_id}}/approve", "host": [ "{{base_url}}" ], "path": [ "api", "registers", "{{register_id}}", "approve" ] }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Medical Staff Complete Blood Test",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{medical_token}}" }
+        ],
+        "url": { "raw": "{{base_url}}/api/blood-test/{{register_id}}/complete", "host": [ "{{base_url}}" ], "path": [ "api", "blood-test", "{{register_id}}", "complete" ] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"result\": \"Đủ điều kiện\",\n  \"passed\": true,\n  \"testDate\": \"2024-06-10\",\n  \"bloodPressure\": \"120/80\",\n  \"heartRate\": \"75\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Medical Staff Collect Blood",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{medical_token}}" }
+        ],
+        "url": { "raw": "{{base_url}}/api/blood/collect", "host": [ "{{base_url}}" ], "path": [ "api", "blood", "collect" ] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"testId\": 1,\n  \"bloodType\": \"A\",\n  \"rhType\": \"POSITIVE\",\n  \"totalVolume\": 350\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customer View Donation History",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{customer_token}}" }
+        ],
+        "url": { "raw": "{{base_url}}/api/user/donation-history", "host": [ "{{base_url}}" ], "path": [ "api", "user", "donation-history" ] }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+              "var json = pm.response.json();",
+              "pm.test(\"Trả về mảng dữ liệu\", function () { pm.expect(json).to.be.an(\"array\"); });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Medical Staff View Collected Blood Units",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{medical_token}}" }
+        ],
+        "url": { "raw": "{{base_url}}/api/blood/collect/completed", "host": [ "{{base_url}}" ], "path": [ "api", "blood", "collect", "completed" ] }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+              "var json = pm.response.json();",
+              "pm.test(\"Trả về mảng dữ liệu\", function () { pm.expect(json).to.be.an(\"array\"); });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customer Register Whole Blood Request",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{customer_token}}" }
+        ],
+        "url": { "raw": "{{base_url}}/api/blood-requests/create", "host": [ "{{base_url}}" ], "path": [ "api", "blood-requests", "create" ] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fullName\": \"Nguyen Van B\",\n  \"dateOfBirth\": \"2000-01-01\",\n  \"patientAddress\": {\n    \"province\": \"Hanoi\",\n    \"district\": \"Ba Dinh\",\n    \"ward\": \"Phuc Xa\",\n    \"detail\": \"123 Pho Hue\"\n  },\n  \"phone\": \"0123456789\",\n  \"gender\": \"MALE\",\n  \"bloodType\": \"A\",\n  \"rhType\": \"POSITIVE\",\n  \"requiredVolume\": 350,\n  \"hospitalName\": \"Bach Mai\",\n  \"medicalCondition\": \"Thiếu máu\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+              "var json = pm.response.json();",
+              "pm.test(\"Có id trả về\", function () { pm.expect(json.id).to.exist; });",
+              "pm.collectionVariables.set(\"blood_request_id\", json.id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Manager Approve Whole Blood Request",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{manager_token}}" }
+        ],
+        "url": { "raw": "{{base_url}}/api/blood-requests/{{blood_request_id}}/approve", "host": [ "{{base_url}}" ], "path": [ "api", "blood-requests", "{{blood_request_id}}", "approve" ] }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Medical Staff Complete Whole Blood Request",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{medical_token}}" }
+        ],
+        "url": { "raw": "{{base_url}}/api/blood-requests/whole-requests/{{blood_request_id}}/complete", "host": [ "{{base_url}}" ], "path": [ "api", "blood-requests", "whole-requests", "{{blood_request_id}}", "complete" ] }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customer Register Component Blood Request",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{customer_token}}" }
+        ],
+        "url": { "raw": "{{base_url}}/api/blood-requests/blood-requests/component", "host": [ "{{base_url}}" ], "path": [ "api", "blood-requests", "blood-requests", "component" ] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fullName\": \"Nguyen Van C\",\n  \"gender\": \"MALE\",\n  \"dateOfBirth\": \"2000-01-01\",\n  \"phone\": \"0123456789\",\n  \"patientAddress\": {\n    \"province\": \"Hanoi\",\n    \"district\": \"Ba Dinh\",\n    \"ward\": \"Phuc Xa\",\n    \"detail\": \"123 Pho Hue\"\n  },\n  \"bloodType\": \"A\",\n  \"rhType\": \"POSITIVE\",\n  \"hospitalName\": \"Bach Mai\",\n  \"medicalCondition\": \"Thiếu máu\",\n  \"redCellQuantity\": 1,\n  \"plasmaQuantity\": 1,\n  \"plateletQuantity\": 1\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+              "var json = pm.response.json();",
+              "pm.test(\"Có id trả về\", function () { pm.expect(json.id).to.exist; });",
+              "pm.collectionVariables.set(\"component_request_id\", json.id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Manager Approve Component Blood Request",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{manager_token}}" }
+        ],
+        "url": { "raw": "{{base_url}}/api/blood-requests/component/{{component_request_id}}/approve", "host": [ "{{base_url}}" ], "path": [ "api", "blood-requests", "component", "{{component_request_id}}", "approve" ] }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Medical Staff Complete Component Blood Request",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{medical_token}}" }
+        ],
+        "url": { "raw": "{{base_url}}/api/blood-requests/component/{{component_request_id}}/complete", "host": [ "{{base_url}}" ], "path": [ "api", "blood-requests", "component", "{{component_request_id}}", "complete" ] }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8080" }
+  ]
+} 
